@@ -6,6 +6,9 @@
   "keywords": [
     "homebridge-plugin"
   ],
+  "engines": {
+    "homebridge": ">=0.2.0"
+  },
   "dependencies": {
     "node-x10-comm": "^1.0.4"
   },
