@@ -19,7 +19,16 @@ function X10accessory(log, config) {
 
   this.log("Registered X10accessory via log");
   console.log("Registered X10accessory via console");
-//  this.service = new Service.Switch(this.name);
+  this.service = new Service.Switch(this.name);
+
+  this.service
+    .getCharacteristic(Characteristic.On)
+    .on('get', this.getState.bind(this));
+
+  this.service
+    .getCharacteristic(Characteristic.On)
+    .on('get', this.getState.bind(this))
+    .on('set', this.setState.bind(this));
 
 }
 
@@ -56,13 +65,13 @@ X10accessory.prototype.getServices = function() {
   .setCharacteristic(Characteristic.Model,        'Firecracker')
   .setCharacteristic(Characteristic.SerialNumber, '10001');
 
-  var characteristic = switchService.getCharacteristic(Characteristic.On)
+/*  var characteristic = switchService.getCharacteristic(Characteristic.On)
   .on('set', this.setState.bind(this));
 
   if (this.stateCommand) {
     characterist.on('get', this.getState.bind(this))
   };
-
+*/
   return [switchService];
 
 }
