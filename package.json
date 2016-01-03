@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-x10-cm17a",
+  "version": "0.1.0",
+  "description": "A shim to connect homebridge with the X10 Firecracker (CM17A) interface.",
+  "main": "x10_test.js",
+  "dependencies": {
+    "node-x10-comm": "^1.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blakelarson/homebridge-X10-CM17A.git"
+  },
+  "author": "Blake Larson <npm@blakelarson.com> (http://blakelarson.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blakelarson/homebridge-X10-CM17A/issues"
+  },
+  "homepage": "https://github.com/blakelarson/homebridge-X10-CM17A#readme"
+}
