@@ -17,6 +17,8 @@ function X10accessory(log, config) {
   this.house_code = config["house_code"];
   this.module_code = config["module_code"];
 
+  this.log("Registered X10accessory via log");
+  console.log("Registered X10accessory via console");
 //  this.service = new Service.Switch(this.name);
 
 }
@@ -24,6 +26,8 @@ function X10accessory(log, config) {
 X10accessory.prototype.setState = function(powerOn, callback) {
   var accessory = this;
   var state = powerOn ? 1 : 0;
+
+  console.log("setState called with powerOn = " + powerOn);
 
   var device = x10.device();
   device.open( accessory.comm_name, function() {
