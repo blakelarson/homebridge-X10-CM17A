@@ -2,7 +2,10 @@
   "name": "homebridge-x10-cm17a",
   "version": "0.1.0",
   "description": "A shim to connect homebridge with the X10 Firecracker (CM17A) interface.",
-  "main": "x10_test.js",
+  "main": "index.js",
+  "keywords": [
+    "homebridge-plugin"
+  ],
   "dependencies": {
     "node-x10-comm": "^1.0.4"
   },

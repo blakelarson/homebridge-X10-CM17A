@@ -17,7 +17,7 @@ function X10accessory(log, config) {
   this.house_code = config["house_code"];
   this.module_code = config["module_code"];
 
-  this.service = new Service.Switch(this.name);
+//  this.service = new Service.Switch(this.name);
 
 }
 
@@ -37,8 +37,29 @@ X10accessory.prototype.setState = function(powerOn, callback) {
   });
 }
 
-/*
-X10accessory.prototype.getService = function() {
+X10accessory.prototype.getState = function(callback) {
+  var accessory = this;
+
+  var state = 'on';
+}
+
+X10accessory.prototype.getServices = function() {
   var informationService = new Service.AccessoryInformation();
-  var switchService
-*/
+  var switchService = new Service.Switch(this.name);
+
+  informationService
+  .setCharacteristic(Characteristic.Manufacturer, 'X10')
+  .setCharacteristic(Characteristic.Model,        'Firecracker')
+  .setCharacteristic(Characteristic.SerialNumber, '10001');
+
+  var characteristic = switchService.getCharacteristic(Characteristic.On)
+  .on('set', this.setState.bind(this));
+
+  if (this.stateCommand) {
+    characterist.on('get', this.getState.bind(this))
+  };
+
+  return [switchService];
+
+}
+
