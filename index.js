@@ -18,7 +18,7 @@ function X10accessory(log, config) {
   this.module_code = config["module_code"];
 
   this.log("Registered X10accessory via log");
-  console.log("Registered X10accessory via console");
+
   this.service = new Service.Switch(this.name);
 
   this.service
@@ -30,49 +30,58 @@ function X10accessory(log, config) {
     .on('get', this.getState.bind(this))
     .on('set', this.setState.bind(this));
 
+  this.log("Completed registration of get/set state functions");
+
 }
 
 X10accessory.prototype.setState = function(powerOn, callback) {
   var accessory = this;
   var state = powerOn ? 1 : 0;
 
-  console.log("setState called with powerOn = " + powerOn);
+  this.log("setState called with powerOn = " + powerOn);
 
   var device = x10.device();
   device.open( accessory.comm_name, function() {
     device.sendCommand( accessory.house_code, accessory.module_code, state, function() {
-      console.log("Turned on device");
+      this.log("Turned on device");
     }, function(err) {
-      console.log("Unable to send to device");
+      this.log("Unable to send to device");
     });
   }, function(err) {
-    console.log(err);
+    this.log(err);
   });
 }
 
 X10accessory.prototype.getState = function(callback) {
   var accessory = this;
 
-  var state = 'on';
+  this.log("Getting current state");
+
+  var state = 1;
+  callback(null, state);
 }
 
 X10accessory.prototype.getServices = function() {
-  var informationService = new Service.AccessoryInformation();
+/*  var informationService = new Service.AccessoryInformation();
   var switchService = new Service.Switch(this.name);
+
+  this.log("Someone's calling the getServices function");
 
   informationService
   .setCharacteristic(Characteristic.Manufacturer, 'X10')
   .setCharacteristic(Characteristic.Model,        'Firecracker')
   .setCharacteristic(Characteristic.SerialNumber, '10001');
 
-/*  var characteristic = switchService.getCharacteristic(Characteristic.On)
+  var characteristic = switchService.getCharacteristic(Characteristic.On)
   .on('set', this.setState.bind(this));
 
   if (this.stateCommand) {
-    characterist.on('get', this.getState.bind(this))
+    characteristic.on('get', this.getState.bind(this))
   };
-*/
-  return [switchService];
 
+  this.log("finished getServices");
+  return [switchService];
+*/
+  return [this.service];
 }
 
